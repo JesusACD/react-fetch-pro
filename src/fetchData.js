@@ -27,8 +27,14 @@ const getSuspender = (promise) => {
   return { read };
 };
 
-export function fetchData(url) {
-  const promise = fetch(url)
+export function fetchData(url, options = {}) {
+  const { method = "GET", headers = {}, body } = options;
+  
+  const promise = fetch(url, {
+    method,
+    headers,
+    body,
+  })
     .then((response) => response.json())
     .then((json) => json);
 
